@@ -54,7 +54,7 @@ public class InfoActivity extends AppCompatActivity {
         type.setImageResource(cosmo.setType());
         */
         ImageView frame = findViewById(R.id.selected_frame);
-        frame.setImageResource(cosmo.setFrame());
+        frame.setImageResource(ImageHelper.getFrame(cosmo.get_type()));
 
 
     }

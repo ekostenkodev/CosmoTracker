@@ -23,21 +23,19 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
 
-    public static boolean isVisAndTypeFill = false;
-
-    public List<Visibility> visibilityList;
-    public List<CosmoType> cosmotypeList;
     public List<CosmoObject> CosmoList;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LoadVisibilityAndType(this);
-
-
         listView = (ListView) findViewById(R.id.lvMain);
-        CosmoList = getData(this,"CosmoObjects");
+        CosmoList = getData(this);
 
         CosmoAdapter adapter= new CosmoAdapter(this, CosmoList);
 
@@ -47,13 +45,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                getInfo(CosmoList.get(position));
+                getInfo(CosmoList.get(position)); // TODO возможно нужно исправить, но Intent требует this, что нельзя сделать в лисенере
+
             }
         });
-
-
-
-
 
 
     }
@@ -66,71 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void LoadVisibilityAndType(Context context){
 
 
-        if(!isVisAndTypeFill){
-            cosmotypeList = new ArrayList<>();
-            visibilityList = new ArrayList<>();
 
-            DatabaseHelper oh = new DatabaseHelper(context, "CosmoTrackerDB.db");
-            SQLiteDatabase db = oh.openDataBase();
-            Cursor cur = null;
-            String strSQL = String.format("SELECT * FROM %s ","Visibility");
-            cur = db.rawQuery(strSQL, null);
-            cur.moveToFirst();
-
-            while(!cur.isAfterLast()) {
-
-
-                visibilityList.add(new Visibility(cur.getInt(0),cur.getString(1)));
-
-                cur.moveToNext();
-
-            }
-
-
-            strSQL = String.format("SELECT * FROM CosmoType");
-            cur = db.rawQuery(strSQL, null);
-            cur.moveToFirst();
-
-            while(!cur.isAfterLast()) {
-
-                cosmotypeList.add(new CosmoType(cur.getInt(0),cur.getString(1)));
-
-                cur.moveToNext();
-            }
-
-            if(cur != null){
-                cur.close();
-                cur = null;
-            }
-            if(db != null){
-                db.close();
-                db = null;
-            } oh = null;
-
-            //
-            //
-            //
-
-            isVisAndTypeFill = true;
-
-            for(CosmoType c : cosmotypeList)
-                Log.d("-----------------",c.get_id()+"  "+c.get_name());
-
-        }
-
-    }
-
-
-    public void onClick(View view){
-
-        Log.d("-------------", "itemSelect: position =");
-
-    }
-
-    public static List<CosmoObject> getData(Context context, String table){
+    public static List<CosmoObject> getData(Context context){
 
         ArrayList<CosmoObject> list = new ArrayList<>();
 

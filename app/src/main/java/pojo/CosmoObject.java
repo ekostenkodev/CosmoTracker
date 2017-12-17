@@ -11,32 +11,36 @@ import android.os.Parcelable;
 
 public class CosmoObject implements Parcelable {
 
-    private int _id;
-    private String _name;
-    private int _type;
-    private Date _nextArrival;
-    private Date _period;
-    private String _location;
-    private String _info;
-    private int _visibility;
-    private String _image;
+    private int _id; // id космического объекта (из таблицы CosmoObjects)
+    private String _name; // имя космического объекта
+    private int _type; //тип космического объекта (индекс в int из таблицы CosmoType)
+    private Date _nextArrival; // следующий перигелий
+    private Date _period; // период обращения
+    private String _location; // локация, где можно будет наблюдать за космическим объектом
+    private String _info; // информация о космическом объекте
+    private int _visibility; // видимость объекта (индекс в int из таблицы Visibility)
+    private String _image; // имя изображения
 
 
 
     public  CosmoObject(Cursor cursor){
+        /*
+        Констрункор космического объекта из sql запроса (cursor)
+         */
+
 
         this._id = cursor.getInt(0);
 
 
         this._name = cursor.getString(1);
         this._type = cursor.getInt(2);
-        //this._nextArrival = Date.valueOf(cursor.getString(3));
+        //this._nextArrival = Date.valueOf(cursor.getString(3)); // TODO настройка даты
         //this._period = Date.valueOf(cursor.getString(4));
         //this._location = Integer.parseInt(cursor.getString(5));
         this._info = cursor.getString(6);
         this._visibility = cursor.getInt(7);
 
-        this._image = "img" + this._id+".png";
+        this._image = "img" + this._id+".png"; // TODO правильный доступ к ресурсам
 
 
 
@@ -44,6 +48,9 @@ public class CosmoObject implements Parcelable {
 
 
     public CosmoObject(Parcel in) {
+        /*
+        Конструктор для передачи информации об объекте из одного activity в другой
+         */
         String[] data = new String[9];
         in.readStringArray(data);
 
@@ -59,6 +66,9 @@ public class CosmoObject implements Parcelable {
     }
 
     public static final Parcelable.Creator<CosmoObject> CREATOR = new Parcelable.Creator<CosmoObject>() {
+        /*
+        Форматирование информации об объекте в бинарный (из одного activity в другой)
+         */
 
         @Override
         public CosmoObject createFromParcel(Parcel source) {
@@ -71,75 +81,7 @@ public class CosmoObject implements Parcelable {
         }
     };
 
-    public int setVisibility(){
 
-        switch (_type){
-            case 1: // event
-                switch (_visibility){
-                    case 2: // tele
-                            return R.drawable.telescope_event;
-
-                    case 3: // eye
-                            return R.drawable.eye_event;
-
-                }
-                break;
-            case 2: // eclipse
-                switch (_visibility){
-                    case 2: // tele
-                        return R.drawable.telescope_eclipse;
-
-                    case 3: // eye
-                        return R.drawable.eye_eclipse;
-
-                }
-                break;
-
-            case 3: // planet
-                break;
-            case 4: // comet
-                switch (_visibility){
-                    case 2: // tele
-                        return R.drawable.telescope_comet;
-
-                    case 3: // eye
-                        return R.drawable.eye_comet;
-
-                }
-                break;
-
-        }
-
-
-
-        return 0;
-    } // TODO: ПЕРЕДЕЛАТЬ!!!!!
-    public int setType(){
-        switch (_type){
-            case 1:
-                return R.drawable.icon_event;
-            case 2:
-                return R.drawable.icon_eclipse;
-            case 3:
-
-            case 4:
-                return R.drawable.icon_comet;
-        }
-    return 0;
-    }// TODO: ПЕРЕДЕЛАТЬ!!!!!
-    public int setFrame(){
-        switch (_type){
-            case 1:
-                return R.drawable.frame_event;
-            case 2:
-                return R.drawable.frame_eclipse;
-            case 3:
-
-            case 4:
-                return R.drawable.frame_comet;
-        }
-        return 0;
-    }// TODO: ПЕРЕДЕЛАТЬ!!!!!
 
     public int get_id() {
         return _id;
@@ -184,6 +126,9 @@ public class CosmoObject implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        /*
+        Передача информации об объекте в бинарный (из одного activity в другой)
+         */
         parcel.writeStringArray(new String[] {
                 String.valueOf(_id),
                 _name, String.valueOf(_type),

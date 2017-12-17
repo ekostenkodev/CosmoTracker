@@ -3,6 +3,7 @@ package adapter;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cosmotracker.ImageHelper;
 import com.example.cosmotracker.R;
 
 import java.io.IOException;
@@ -76,14 +78,17 @@ public class CosmoAdapter extends BaseAdapter {
             return null;
         }
 
+
+
+
         ImageView vis = view.findViewById(R.id.list_visibility);
-        vis.setImageResource(cosmo.setVisibility());
+        vis.setImageResource(ImageHelper.getVisibility(cosmo.get_type(),cosmo.get_visibility()));
 
         ImageView frame = view.findViewById(R.id.list_frame);
-        frame.setImageResource(cosmo.setFrame());
+        frame.setImageResource(ImageHelper.getFrame(cosmo.get_type()));
 
         ImageView type = view.findViewById(R.id.list_type);
-        type.setImageResource(cosmo.setType());
+        type.setImageResource(ImageHelper.getType(cosmo.get_type()));
 
 
 
