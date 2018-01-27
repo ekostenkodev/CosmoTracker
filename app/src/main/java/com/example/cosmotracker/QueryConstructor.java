@@ -7,14 +7,16 @@ import android.content.SharedPreferences;
 public class QueryConstructor {
 
 
-    private static int CosmoSize = 10;
+    private int cosmoSize;
     public static boolean isChanged = false;
 
-    public QueryConstructor(int CosmoSize){
-        this.CosmoSize = CosmoSize;
+    public QueryConstructor(int cosmoSize){
+        this.cosmoSize = cosmoSize;
     }
 
     public String getQuery(Context context){
+
+        // todo сделать сортировку по дате
 
         String query = "SELECT * FROM CosmoObjects";
 
@@ -31,7 +33,7 @@ public class QueryConstructor {
         if(sortList[1][1]) visStr+= (visStr.length()>0?",":"") + "'2'";
         if(sortList[1][2]) visStr+= (visStr.length()>0?",":"") + "'3'";
 
-        query += " WHERE Type IN (" + typeStr + ") AND Visibility IN (" + visStr + ")";
+        query += " WHERE (_id <= " + cosmoSize + ") AND Type IN (" + typeStr + ") AND Visibility IN (" + visStr + ")";
 
         isChanged = true;
 

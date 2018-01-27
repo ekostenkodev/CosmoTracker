@@ -29,17 +29,14 @@
                 android:id="@+id/list_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentStart="false"
-                android:layout_alignParentTop="false"
-                app:srcCompat="@drawable/image" />
+ />
 
             <ImageView
                 android:id="@+id/list_frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                app:srcCompat="@drawable/comet_frame" />
+                app:srcCompat="@drawable/frame_comet" />
 
         </FrameLayout>
 
@@ -90,14 +87,14 @@
             android:layout_alignParentLeft="false"
             android:layout_alignParentStart="false"
             android:layout_weight="1"
-            app:srcCompat="@drawable/comet_icon" />
+            app:srcCompat="@drawable/type_comet" />
 
         <ImageView
             android:id="@+id/list_visibility"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/comet_eye" />
+            app:srcCompat="@drawable/vis_eye" />
 
         <ImageView
             android:id="@+id/list_border"
@@ -113,7 +110,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/eclipse_binoculars" />
+            app:srcCompat="@drawable/vis_bino" />
 
         <TextView
             android:id="@+id/list_timer"
@@ -124,7 +121,7 @@
             android:layout_alignParentRight="false"
             android:layout_weight="0.5"
             android:text="test"
-            android:textAlignment="textEnd" />
+            android:gravity="end" />
     </LinearLayout>
 
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,21 +28,30 @@ import pojo.CosmoObject;
 
 public class CosmoAdapter extends BaseAdapter {
 
-    private List<CosmoObject> list;
+    private ArrayList<CosmoObject> list;
     private LayoutInflater layoutInflater;
     private AssetManager assets;
     private Context context;
-    private CosmoDelegate cosmoDelegate , viewDelegate;
+    private CosmoDelegate subDelegate, viewDelegate;
 
 
-    public CosmoAdapter(Context context, List<CosmoObject> list, CosmoDelegate cosmoDelegate, CosmoDelegate viewDelegate) {
+    public CosmoAdapter(Context context, ArrayList<CosmoObject> list, CosmoDelegate subDelegate, CosmoDelegate viewDelegate) {
         assets = context.getAssets();
         this.list = list;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.cosmoDelegate = cosmoDelegate;
+        this.subDelegate = subDelegate;
         this.viewDelegate = viewDelegate;
 
+    }
+
+    public List<CosmoObject>  getList(){
+        return list;
+    }
+
+    public void setNewList(ArrayList<CosmoObject> newList){
+        list.clear();
+        list.addAll(newList);
     }
 
     @Override
@@ -69,10 +79,15 @@ public class CosmoAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.cosmoobject_layout, viewGroup, false);
         }
 
+
+
         CosmoObject cosmo = (CosmoObject) getItem(position);
 
+        final int cosmoID = cosmo.get_id();
+
+
         TextView name = view.findViewById(R.id.list_name);
-        name.setText(cosmo.get_name());
+        name.setText(cosmo.get_name()); // todo длинное имя западает на след строку, исправить
 
 
         TextView info = view.findViewById(R.id.list_info);
@@ -95,7 +110,7 @@ public class CosmoAdapter extends BaseAdapter {
 
 
         ImageView vis = view.findViewById(R.id.list_visibility);
-        vis.setImageResource(ImageHelper.getVisibility(cosmo.get_type(),cosmo.get_visibility()));
+        vis.setImageResource(ImageHelper.getVisibility(cosmo.get_visibility()));
 
         ImageView frame = view.findViewById(R.id.list_frame);
         frame.setImageResource(ImageHelper.getFrame(cosmo.get_type()));
@@ -105,17 +120,17 @@ public class CosmoAdapter extends BaseAdapter {
 
         ImageButton sub = view.findViewById(R.id.list_sub);
 
-        if(Subscription.isSubscribe(context,cosmo.get_id()))
+        if(Subscription.isSubscribe(context,cosmoID))
             sub.setImageResource(R.drawable.icon_sub_on);
         else
             sub.setImageResource(R.drawable.icon_sub_off);
+
 
         sub.setTag(position);
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cosmoDelegate.onBtnClick(position);
-
+                subDelegate.onBtnClick(cosmoID);
             }
         });
 
@@ -123,9 +138,7 @@ public class CosmoAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                viewDelegate.onBtnClick(position);
-                Log.d("---------------",String.valueOf(position));
+                viewDelegate.onBtnClick(cosmoID);
             }
         });
 

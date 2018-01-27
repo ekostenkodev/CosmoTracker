@@ -26,8 +26,6 @@ public class CosmoDataBase {
 
     public static CosmoObject getCosmoObject(Context context, int id){
 
-        ArrayList<CosmoObject> list = new ArrayList<>();
-
         DatabaseHelper oh = new DatabaseHelper(context, "CosmoTrackerDB.db");
         SQLiteDatabase db = oh.openDataBase();
         Cursor cur = null;
@@ -56,7 +54,7 @@ public class CosmoDataBase {
 
 
 
-    public static ArrayList<CosmoObject> getData(Context context, String query , int endRow){
+    public static ArrayList<CosmoObject> getData(Context context, String query ){
 
         ArrayList<CosmoObject> list = new ArrayList<>();
 
@@ -69,15 +67,10 @@ public class CosmoDataBase {
         //cur = oh.getAllData(table);
         cur.moveToFirst();
 
-        int count = 0;
-
         while(!cur.isAfterLast()) {
 
             CosmoObject c = new CosmoObject(cur);
             list.add(c);
-            count++;
-            if(count==endRow)
-                break;
 
             cur.moveToNext();
         }

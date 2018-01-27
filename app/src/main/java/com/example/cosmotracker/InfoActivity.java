@@ -15,24 +15,21 @@ import pojo.CosmoObject;
 
 public class InfoActivity extends AppCompatActivity {
 
-    public int cosmoID;
+    public CosmoObject cosmo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
-        String cosmoID = getIntent().getStringExtra("cosmo");
-        this.cosmoID = Integer.parseInt(cosmoID);
+        int cosmoID = getIntent().getIntExtra("cosmo", 0);
 
-
-
-        setCosmoObject(this.cosmoID);
+        setCosmoObject(cosmoID);
 
     }
     private void setCosmoObject(int cosmoID){
 
-        CosmoObject cosmo = CosmoDataBase.getCosmoObject(this, cosmoID);
+        cosmo = CosmoDataBase.getCosmoObject(this, cosmoID);
 
         TextView name = (TextView) findViewById(R.id.selected_name);
         name.setText(cosmo.get_name());
@@ -55,7 +52,7 @@ public class InfoActivity extends AppCompatActivity {
         }
 
         ImageView vis = findViewById(R.id.selected_vis);
-        vis.setImageResource(ImageHelper.getVisibility(cosmo.get_type(),cosmo.get_visibility()));
+        vis.setImageResource(ImageHelper.getVisibility(cosmo.get_visibility()));
 
         ImageView type = findViewById(R.id.selected_type);
         type.setImageResource(ImageHelper.getType(cosmo.get_type()));
@@ -65,7 +62,7 @@ public class InfoActivity extends AppCompatActivity {
 
         ImageView sub = findViewById(R.id.selected_sub);
 
-        if(Subscription.isSubscribe(this,cosmo.get_id()))
+        if(Subscription.isSubscribe(this,cosmoID))
             sub.setImageResource(R.drawable.icon_sub_on);
         else
             sub.setImageResource(R.drawable.icon_sub_off);
@@ -74,17 +71,17 @@ public class InfoActivity extends AppCompatActivity {
 
     }
 
-
     public void onSubscribeClick(View view)
     {
         ImageView sub = findViewById(R.id.selected_sub);
-        if(Subscription.isSubscribe(this,cosmoID)) {
+
+        if(Subscription.isSubscribe(this,cosmo.get_id())) {
             sub.setImageResource(R.drawable.icon_sub_off);
-            Subscription.deleteSubscribtion(this, cosmoID);
+            Subscription.deleteSubscribtion(this, cosmo.get_id());
         }
         else {
             sub.setImageResource(R.drawable.icon_sub_on);
-            Subscription.addSubscribtion(this, cosmoID);
+            Subscription.addSubscribtion(this, cosmo.get_id());
         }
     }
 

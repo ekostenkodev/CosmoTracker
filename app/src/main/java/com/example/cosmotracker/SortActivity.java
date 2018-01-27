@@ -47,9 +47,7 @@ public class SortActivity extends AppCompatActivity {
 
     public void onSortClick(View view){
 
-
         SortSharedPreferences.saveSharedSwitchers(this, switchers);
-
 
         finish();
     }
