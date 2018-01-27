@@ -1,117 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="155dp"
-    android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar">
+    android:background="@color/back_light"
+    android:orientation="vertical"
+    android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar"
+    android:weightSum="1">
 
-
-    <ImageView
-        android:id="@+id/list_back_cosmo"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/background_cosmoobject" />
-
-    <ImageView
-        android:id="@+id/list_back_icons"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/list_back_cosmo"
-        android:adjustViewBounds="false"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/background_icons" />
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="1">
 
-    <ImageView
-        android:id="@+id/list_type"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignBottom="@+id/list_back_icons"
-        android:layout_alignLeft="@+id/list_image"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_marginBottom="5dp"
-        app:srcCompat="@drawable/comet_icon" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.65">
 
-    <ImageView
-        android:id="@+id/list_visibility"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignBottom="@+id/list_type"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/list_type"
-        android:layout_toRightOf="@+id/list_type"
-        app:srcCompat="@drawable/comet_eye" />
+            <ImageView
+                android:id="@+id/list_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="false"
+                app:srcCompat="@drawable/image" />
 
-    <ImageView
-        android:id="@+id/list_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/image" />
+            <ImageView
+                android:id="@+id/list_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-    <ImageView
-        android:id="@+id/list_frame"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignStart="@+id/list_image"
-        android:layout_alignTop="@+id/list_image"
-        app:srcCompat="@drawable/comet_frame" />
+                app:srcCompat="@drawable/comet_frame" />
 
-    <ImageView
-        android:id="@+id/list_back_name"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_alignTop="@+id/list_image"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/list_image"
-        android:layout_toRightOf="@+id/list_image"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/background_name" />
+        </FrameLayout>
 
-    <ImageView
-        android:id="@+id/list_back_info"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_alignBottom="@+id/list_image"
-        android:layout_alignLeft="@+id/list_back_name"
-        android:layout_alignStart="@+id/list_back_name"
-        android:layout_below="@+id/list_back_name"
-        android:layout_marginRight="10dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/background_info" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.35"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/list_name"
+            <TextView
+                android:id="@+id/list_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/back_dark50op"
+                android:padding="3dp"
+                android:text="Name"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/list_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_alignBottom="@+id/list_image"
+
+                android:layout_below="@+id/list_name"
+                android:background="@color/back_light50op"
+                android:padding="3dp"
+                android:text="Text"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/list_back_name"
-        android:layout_alignEnd="@+id/list_back_name"
-        android:layout_alignStart="@+id/list_back_name"
-        android:layout_alignTop="@+id/list_back_name"
-        android:padding="3dp"
-        android:text="TextView"
-        android:textSize="15sp" />
+        android:layout_weight="0.8"
+        android:background="@color/back_dark"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-    <TextView
-        android:id="@+id/list_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/list_back_info"
-        android:layout_alignEnd="@+id/list_back_info"
-        android:layout_alignStart="@+id/list_back_info"
-        android:layout_below="@+id/list_back_name"
-        android:padding="3dp"
-        android:text="TextView"
-        android:textSize="11sp" />
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/list_type"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/comet_icon" />
+
+        <ImageView
+            android:id="@+id/list_visibility"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/comet_eye" />
+
+        <ImageView
+            android:id="@+id/list_border"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.1"
+            app:srcCompat="@drawable/icon_border" />
+
+        <ImageButton
+            android:id="@+id/list_sub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/eclipse_binoculars" />
+
+        <TextView
+            android:id="@+id/list_timer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="false"
+            android:layout_weight="0.5"
+            android:text="test"
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+
+</LinearLayout>

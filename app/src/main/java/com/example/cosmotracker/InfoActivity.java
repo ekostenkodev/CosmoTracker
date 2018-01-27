@@ -3,6 +3,8 @@ package com.example.cosmotracker;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,19 +15,24 @@ import pojo.CosmoObject;
 
 public class InfoActivity extends AppCompatActivity {
 
+    public int cosmoID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
-        CosmoObject cosmo = (CosmoObject)getIntent().getParcelableExtra("cosmo");
+        String cosmoID = getIntent().getStringExtra("cosmo");
+        this.cosmoID = Integer.parseInt(cosmoID);
 
 
 
-        setCosmoObject(cosmo);
+        setCosmoObject(this.cosmoID);
+
     }
-    private void setCosmoObject(CosmoObject cosmo){
+    private void setCosmoObject(int cosmoID){
 
+        CosmoObject cosmo = CosmoDataBase.getCosmoObject(this, cosmoID);
 
         TextView name = (TextView) findViewById(R.id.selected_name);
         name.setText(cosmo.get_name());
@@ -46,16 +53,40 @@ public class InfoActivity extends AppCompatActivity {
         catch(IOException ex) {
             return ;
         }
-        /*
-        ImageView vis = view.findViewById(R.id.visibility);
-        vis.setImageResource(cosmo.setVisibility());
 
-        ImageView type = view.findViewById(R.id.type);
-        type.setImageResource(cosmo.setType());
-        */
+        ImageView vis = findViewById(R.id.selected_vis);
+        vis.setImageResource(ImageHelper.getVisibility(cosmo.get_type(),cosmo.get_visibility()));
+
+        ImageView type = findViewById(R.id.selected_type);
+        type.setImageResource(ImageHelper.getType(cosmo.get_type()));
+
         ImageView frame = findViewById(R.id.selected_frame);
         frame.setImageResource(ImageHelper.getFrame(cosmo.get_type()));
 
+        ImageView sub = findViewById(R.id.selected_sub);
+
+        if(Subscription.isSubscribe(this,cosmo.get_id()))
+            sub.setImageResource(R.drawable.icon_sub_on);
+        else
+            sub.setImageResource(R.drawable.icon_sub_off);
+
+
 
     }
+
+
+    public void onSubscribeClick(View view)
+    {
+        ImageView sub = findViewById(R.id.selected_sub);
+        if(Subscription.isSubscribe(this,cosmoID)) {
+            sub.setImageResource(R.drawable.icon_sub_off);
+            Subscription.deleteSubscribtion(this, cosmoID);
+        }
+        else {
+            sub.setImageResource(R.drawable.icon_sub_on);
+            Subscription.addSubscribtion(this, cosmoID);
+        }
+    }
+
+
 }

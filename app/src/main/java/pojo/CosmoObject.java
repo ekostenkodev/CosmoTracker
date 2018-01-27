@@ -9,7 +9,7 @@ import java.sql.Date;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class CosmoObject implements Parcelable {
+public class CosmoObject {
 
     private int _id; // id космического объекта (из таблицы CosmoObjects)
     private String _name; // имя космического объекта
@@ -34,7 +34,7 @@ public class CosmoObject implements Parcelable {
 
         this._name = cursor.getString(1);
         this._type = cursor.getInt(2);
-        //this._nextArrival = Date.valueOf(cursor.getString(3)); // TODO настройка даты
+        this._nextArrival = Date.valueOf(cursor.getString(3)); // TODO настройка даты
         //this._period = Date.valueOf(cursor.getString(4));
         //this._location = Integer.parseInt(cursor.getString(5));
         this._info = cursor.getString(6);
@@ -47,39 +47,6 @@ public class CosmoObject implements Parcelable {
     }
 
 
-    public CosmoObject(Parcel in) {
-        /*
-        Конструктор для передачи информации об объекте из одного activity в другой
-         */
-        String[] data = new String[9];
-        in.readStringArray(data);
-
-        this._id = Integer.parseInt(data[0]);
-        this._name = data[1];
-        this._type = Integer.parseInt(data[2]);
-        //this._nextArrival = Date.valueOf(data[3]);
-        //this._period = Date.valueOf(data[4]);
-        //this._location = data[5];
-        this._info = data[6];
-        this._visibility = Integer.parseInt(data[7]);
-        this._image = data[8];
-    }
-
-    public static final Parcelable.Creator<CosmoObject> CREATOR = new Parcelable.Creator<CosmoObject>() {
-        /*
-        Форматирование информации об объекте в бинарный (из одного activity в другой)
-         */
-
-        @Override
-        public CosmoObject createFromParcel(Parcel source) {
-            return new CosmoObject(source);
-        }
-
-        @Override
-        public CosmoObject[] newArray(int size) {
-            return new CosmoObject[size];
-        }
-    };
 
 
 
@@ -119,22 +86,5 @@ public class CosmoObject implements Parcelable {
         return _image;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        /*
-        Передача информации об объекте в бинарный (из одного activity в другой)
-         */
-        parcel.writeStringArray(new String[] {
-                String.valueOf(_id),
-                _name, String.valueOf(_type),
-                String.valueOf(_nextArrival),
-                String.valueOf(_period),
-                _location,_info,
-                String.valueOf(_visibility),_image});
-    }
 }
