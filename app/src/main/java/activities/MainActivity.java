@@ -1,22 +1,23 @@
-package com.example.cosmotracker;
+package activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
+
+import com.example.cosmotracker.CosmoDataBase;
+import com.example.cosmotracker.CosmoDelegate;
+import com.example.cosmotracker.QueryConstructor;
+import com.example.cosmotracker.R;
+import com.example.cosmotracker.Subscription;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import adapter.CosmoAdapter;
 import pojo.CosmoObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 CosmoSize += MIN_SIZE;
 
                 ArrayList<CosmoObject> newList = getCosmoList(CosmoSize);
-                // todo загрузка
+                // todo пустить загрузку
 
                 if(newList.size() == adapter.getCount()) {
                     ImageButton imageButton = (ImageButton)v;
@@ -138,9 +139,10 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        CosmoSize = MIN_SIZE;
-        adapter.setNewList(getCosmoList(CosmoSize));
-
+        if(QueryConstructor.isChanged()) { // todo изменить механизм обновления списка
+            CosmoSize = MIN_SIZE;
+            adapter.setNewList(getCosmoList(CosmoSize));
+        }
         adapter.notifyDataSetChanged();
     }
 

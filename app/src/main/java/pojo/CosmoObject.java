@@ -19,9 +19,6 @@ public class CosmoObject {
     private int _visibility; // видимость объекта (индекс в int из таблицы Visibility)
     private String _image; // имя изображения
 
-
-
-
     public  CosmoObject(Cursor cursor){
         /*
         Констрункор космического объекта из sql запроса (cursor)
@@ -33,13 +30,9 @@ public class CosmoObject {
         this._nextArrival = Date.valueOf(cursor.getString(3));
         this._info = cursor.getString(4);
         this._visibility = cursor.getInt(5);
-        this._image = this._name + ".png";
+        this._image = this._name + ".png"; // todo ммм
 
     }
-
-
-
-
 
     public int get_id() {
         return _id;

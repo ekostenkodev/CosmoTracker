@@ -1,41 +1,58 @@
 package com.example.cosmotracker;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 
 public class QueryConstructor {
 
 
     private int cosmoSize;
-    public static boolean isChanged = false;
+    public static boolean _isChanged = false;
 
     public QueryConstructor(int cosmoSize){
         this.cosmoSize = cosmoSize;
     }
 
+    public static boolean isChanged(){
+
+        if(_isChanged == false)
+            return false;
+
+        _isChanged = false;
+        return true;
+
+    }
+
     public String getQuery(Context context){
 
-        // todo сделать сортировку по дате
+
+        SortSettings sortSettings = SharedPreferences.getSavedSortPreferences(context);
 
         String query = "SELECT * FROM CosmoObjects";
 
-        boolean[][] sortList = SortSharedPreferences.getSavedSortPreferences(context);
+
+        boolean[] type = sortSettings.getValue(SortSettings.sortSwitchers.type);
 
         String typeStr = "";
-        if(sortList[0][0]) typeStr+="'1'";
-        if(sortList[0][1]) typeStr+= (typeStr.length()>0?",":"") + "'2'";
-        if(sortList[0][2]) typeStr+= (typeStr.length()>0?",":"") + "'3'";
-        if(sortList[0][3]) typeStr+= (typeStr.length()>0?",":"") + "'4'";
+        if(type[0]) typeStr+="'1'";
+        if(type[1]) typeStr+= (typeStr.length()>0?",":"") + "'2'";
+        if(type[2]) typeStr+= (typeStr.length()>0?",":"") + "'3'";
+        if(type[3]) typeStr+= (typeStr.length()>0?",":"") + "'4'";
 
+        boolean[] vis = sortSettings.getValue(SortSettings.sortSwitchers.vis);
         String visStr = "";
-        if(sortList[1][0]) visStr+="'1'";
-        if(sortList[1][1]) visStr+= (visStr.length()>0?",":"") + "'2'";
-        if(sortList[1][2]) visStr+= (visStr.length()>0?",":"") + "'3'";
+        if(vis[0]) visStr+="'1'";
+        if(vis[1]) visStr+= (visStr.length()>0?",":"") + "'2'";
+        if(vis[2]) visStr+= (visStr.length()>0?",":"") + "'3'";
 
-        query += " WHERE (_id <= " + cosmoSize + ") AND Type IN (" + typeStr + ") AND Visibility IN (" + visStr + ")";
+        query += " WHERE Type IN (" + typeStr + ") AND Visibility IN (" + visStr + ")";
 
-        isChanged = true;
+        boolean[] order = sortSettings.getValue(SortSettings.sortSwitchers.order);
+        if(order[0])
+            query += " ORDER BY NextArrival ASC"+ " LIMIT " + cosmoSize;
+        else
+            query += " ORDER BY NextArrival DESC" + " LIMIT " + cosmoSize;
+
 
         return query;
     }

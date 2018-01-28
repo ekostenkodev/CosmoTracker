@@ -1,4 +1,4 @@
-package com.example.cosmotracker;
+package adapter;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -13,6 +13,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.cosmotracker.CosmoDelegate;
+import com.example.cosmotracker.ImageHelper;
+import com.example.cosmotracker.R;
+import com.example.cosmotracker.Subscription;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package com.example.cosmotracker;
+package activities;
 
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.cosmotracker.CosmoDataBase;
+import com.example.cosmotracker.ImageHelper;
+import com.example.cosmotracker.R;
+import com.example.cosmotracker.Subscription;
 
 import java.io.IOException;
 import java.io.InputStream;

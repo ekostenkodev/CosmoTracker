@@ -18,18 +18,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static String DB_PATH;
     //Имя файла с базой
     public static String DB_NAME;
+
     public SQLiteDatabase database;
     public final Context context;
-//private boolean flagdel = true;
-
-    public SQLiteDatabase getDb() {
-        return database;
-    }
 
     public DatabaseHelper(Context context, String databaseName) {
         super(context, databaseName, null, 1);
         this.context = context;
-        //Составим полный путь к базам для нашего приложения
+        //полный путь к базе
         DB_PATH = context.getDatabasePath(databaseName).getAbsolutePath();
         DB_NAME = databaseName;
         openDataBase();
@@ -60,48 +56,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             checkDb = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
         }
-        //Андроид не любит утечки ресурсов, все должно закрываться
+
         if (checkDb != null) checkDb.close();
         return checkDb != null;
-    }
-
-    /**
-     * метод проверки наличия в БД таблицы
-     */
-    public boolean checkTableInDB(String nameTable) {
-        boolean result = false;
-        Cursor cur = database.query("sqlite_master", new String[]{"name"}, "type=? AND name=?", new String[]{"table", nameTable}, null, null, null);
-        cur.moveToLast();
-        if (cur.getCount() > 0) result = true;
-        cur.close();
-        return result;
-    }
-
-    /**
-     * метод проверки наличия поля в таблице
-     */
-    public boolean checkFieldInTable(String nameTable, String nameField) {
-        boolean result = false;
-        try {
-            Cursor cur = database.rawQuery("PRAGMA table_info('" + nameTable + "')", null);
-            cur.moveToFirst();
-            while (!cur.isAfterLast()) {
-                String name = "";
-                try {
-                    name = cur.getString(cur.getColumnIndexOrThrow("name"));
-                } catch (IllegalArgumentException e) {
-                }
-                if (name.equals(nameField)) {
-                    result = true;
-                    break;
-                }
-                cur.moveToNext();
-            }
-            cur.close();
-            cur = null;
-        } catch (SQLException e) {
-        }
-        return result;
     }
 
     /**
@@ -120,23 +77,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while ((bytesRead = externalDbStream.read(buffer)) > 0) {
             localDbStream.write(buffer, 0, bytesRead);
         }
-        // Мы будем хорошими мальчиками (девочками) и закроем потоки
+
         localDbStream.close();
         externalDbStream.close();
-    }
-
-    /**
-     * Метод получения всех данных из таблицы
-     */
-    public Cursor getAllData(String dbTable) {
-        return database.query(dbTable, null, null, null, null, null, null);
-    }
-
-    /**
-     * Метод получения данных из таблицы по условию
-     */
-    public Cursor getDataByWhere(String table, String[] columns, String where, String[] where_args) {
-        return database.query(table, columns, where, where_args, null, null, null);
     }
 
     /**
