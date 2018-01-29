@@ -2,7 +2,7 @@ package pojo;
 
 import android.database.Cursor;
 
-import com.example.cosmotracker.R;
+import com.ekostenkodev.cosmotracker.R;
 
 import java.sql.Date;
 

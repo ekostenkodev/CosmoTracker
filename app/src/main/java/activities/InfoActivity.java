@@ -3,15 +3,17 @@ package activities;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.cosmotracker.CosmoDataBase;
-import com.example.cosmotracker.ImageHelper;
-import com.example.cosmotracker.R;
-import com.example.cosmotracker.Subscription;
+import com.ekostenkodev.cosmotracker.CosmoDataBase;
+import com.ekostenkodev.cosmotracker.ImageHelper;
+import com.ekostenkodev.cosmotracker.R;
+import com.ekostenkodev.cosmotracker.Subscription;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,9 +31,24 @@ public class InfoActivity extends AppCompatActivity {
 
         int cosmoID = getIntent().getIntExtra("cosmo", 0);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setCosmoObject(cosmoID);
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == android.R.id.home){
+            this.finish();
+            Log.d("-----","exit");
+        }
+        return true; // onOptionsItemSelected(item)
+    }
+
     private void setCosmoObject(int cosmoID){
 
         cosmo = CosmoDataBase.getCosmoObject(this, cosmoID);

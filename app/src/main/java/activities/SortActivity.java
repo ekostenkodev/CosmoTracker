@@ -3,14 +3,16 @@ package activities;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import com.example.cosmotracker.QueryConstructor;
-import com.example.cosmotracker.R;
-import com.example.cosmotracker.SharedPreferences;
-import com.example.cosmotracker.SortSettings;
+import com.ekostenkodev.cosmotracker.QueryConstructor;
+import com.ekostenkodev.cosmotracker.R;
+import com.ekostenkodev.cosmotracker.SharedPreferences;
+import com.ekostenkodev.cosmotracker.SortSettings;
 
 
 public class SortActivity extends AppCompatActivity {
@@ -22,9 +24,25 @@ public class SortActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         setSavedSortSettings();
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == android.R.id.home){
+            this.finish();
+        }
+        return true; // onOptionsItemSelected(item)
+    }
+
 
     public void setSavedSortSettings(){
 

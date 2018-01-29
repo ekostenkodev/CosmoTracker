@@ -1,4 +1,4 @@
-package com.example.cosmotracker;
+package com.ekostenkodev.cosmotracker;
 
 import android.content.Context;
 import android.view.View;

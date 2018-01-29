@@ -1,32 +1,44 @@
 package activities;
 
 import android.content.Intent;
+
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.example.cosmotracker.CosmoDataBase;
-import com.example.cosmotracker.CosmoDelegate;
-import com.example.cosmotracker.QueryConstructor;
-import com.example.cosmotracker.R;
-import com.example.cosmotracker.Subscription;
-
+import com.ekostenkodev.cosmotracker.CosmoDataBase;
+import com.ekostenkodev.cosmotracker.CosmoDelegate;
+import com.ekostenkodev.cosmotracker.QueryConstructor;
+import com.ekostenkodev.cosmotracker.R;
+import com.ekostenkodev.cosmotracker.Subscription;
 import java.util.ArrayList;
-
 import adapter.CosmoAdapter;
+
 import pojo.CosmoObject;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
     private final int MIN_SIZE = 2;
 
     private CosmoAdapter adapter;
     private int CosmoSize = MIN_SIZE;
+
+    private Toolbar toolbar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +49,79 @@ public class MainActivity extends AppCompatActivity {
 
         setCosmoAdapter(getCosmoList(MIN_SIZE));
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.open, R.string.close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
+        //navigationView.setCheckedItem(R.id.nav_main);
+
+
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.sort_button, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.nav_sort:
+                    onSortMenuClick();
+                break;
+            // action with ID action_settings was selected
+
+            default:
+                break;
+        }
+        Log.d("----","asdasd");
+
+
+        /*
+        * case R.id.action_settings:
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+        * */
+        return true;
+    }
+
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        Log.d("-------","xxx" + item.getItemId());
+
+        switch (id){
+            case R.id.nav_subs:
+                break;
+            case R.id.nav_settings:
+                break;
+            case R.id.nav_autor:
+
+                break;
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
 
 
 
@@ -113,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        listView.addFooterView(but);
+       listView.addFooterView(but);
 
     }
 
@@ -146,14 +229,11 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void onSortMenuClick(View view){
+    public void onSortMenuClick(){
         Intent intent = new Intent(this, SortActivity.class);
         startActivity(intent);
     }
 
-    public void onMenuClick(View view){
-        adapter.notifyDataSetChanged();
-    }
 
 
 

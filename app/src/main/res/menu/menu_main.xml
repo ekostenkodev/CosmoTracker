@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="activities.MainActivity"
+
+    >
+
+    <group android:checkableBehavior="single">
+
+        <!--
+        <item android:id="@+id/nav_main"
+            android:icon="@drawable/vis_bino"
+            app:showAsAction="never"
+            android:title="@string/nav_main"/>
+        -->
+        <item android:id="@+id/nav_subs"
+            android:icon="@drawable/menu_sub"
+            app:showAsAction="never"
+            android:title="@string/nav_subs"/>
+
+        <item android:id="@+id/nav_settings"
+            android:icon="@drawable/menu_settings"
+            app:showAsAction="never"
+            android:title="@string/nav_settings"/>
+
+        <item android:id="@+id/nav_autor"
+            android:icon="@drawable/menu_autor"
+            android:title="@string/nav_autor"/>
+
+    </group>
+
+
+
+</menu>
