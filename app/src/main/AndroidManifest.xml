@@ -17,7 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name="activities.InfoActivity" />
-        <activity android:name="activities.SortActivity"></activity>
+        <activity android:name="activities.SortActivity" />
+        <activity android:name="activities.AutorActivity" />
+        <activity android:name="activities.SubsActivity" />
+        <activity android:name="activities.SettingsActivity"></activity>
     </application>
 
 </manifest>

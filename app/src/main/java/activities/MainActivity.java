@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private CosmoAdapter adapter;
     private int CosmoSize = MIN_SIZE;
 
-    private Toolbar toolbar;
 
 
 
@@ -47,9 +46,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // todo пустить загрузку
 
+        setToolbar();
+
+
         setCosmoAdapter(getCosmoList(MIN_SIZE));
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+
+    }
+
+    public void setToolbar(){
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -61,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
-        //navigationView.setCheckedItem(R.id.nav_main);
 
 
     }
@@ -70,37 +78,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.sort_button, menu);
+        //menu.findItem(R.menu.sort_button).setOnMenuItemClickListener(e -> onSortMenuClick());
+
+        menu.findItem(R.id.nav_sort).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                onSortMenuClick();
+
+                return true;
+            }
+        });
+
+
         return true;
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            // action with ID action_refresh was selected
-            case R.id.nav_sort:
-                    onSortMenuClick();
-                break;
-            // action with ID action_settings was selected
-
-            default:
-                break;
-        }
-        Log.d("----","asdasd");
-
-
-        /*
-        * case R.id.action_settings:
-                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-        * */
-        return true;
-    }
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
+    //@SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -113,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_settings:
                 break;
             case R.id.nav_autor:
+
+                Intent intent = new Intent(this, AutorActivity.class);
+                startActivity(intent);
 
                 break;
         }
@@ -167,8 +164,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         but.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         but.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200));// todo сделать кнопке padding
-
-
 
         but.setOnClickListener(new View.OnClickListener() {
             @Override

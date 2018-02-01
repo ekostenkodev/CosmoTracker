@@ -3,6 +3,7 @@ package activities;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,13 +50,13 @@ public class SortActivity extends AppCompatActivity {
 
         SortSettings sortList = SharedPreferences.getSavedSortPreferences(this);
 
-        Switch[] typeSwitch = new Switch[]{
+        SwitchCompat[] typeSwitch = new SwitchCompat[]{
                 findViewById(R.id.sort_comets),
                 findViewById(R.id.sort_eclipses),
                 findViewById(R.id.sort_events),
                 findViewById(R.id.sort_planets)};
 
-        Switch[] visSwitch = new Switch[]{
+        SwitchCompat[] visSwitch = new SwitchCompat[]{
                 findViewById(R.id.sort_eyes),
                 findViewById(R.id.sort_binoculars),
                 findViewById(R.id.sort_telescope)};

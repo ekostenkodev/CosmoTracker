@@ -1,6 +1,7 @@
 package com.ekostenkodev.cosmotracker;
 
 import android.content.Context;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -20,13 +21,13 @@ public class SortSettings {
     }
 
     public SortSettings(View view){
-        Switch[] typeSwitch = new Switch[]{
+        SwitchCompat[] typeSwitch = new SwitchCompat[]{
                 view.findViewById(R.id.sort_comets),
                 view.findViewById(R.id.sort_eclipses),
                 view.findViewById(R.id.sort_events),
                 view.findViewById(R.id.sort_planets)};
 
-        Switch[] visSwitch = new Switch[]{
+        SwitchCompat[] visSwitch = new SwitchCompat[]{
                 view.findViewById(R.id.sort_eyes),
                 view.findViewById(R.id.sort_binoculars),
                 view.findViewById(R.id.sort_telescope)};

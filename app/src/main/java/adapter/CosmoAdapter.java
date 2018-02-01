@@ -50,9 +50,7 @@ public class CosmoAdapter extends BaseAdapter {
 
     }
 
-    public List<CosmoObject>  getList(){
-        return list;
-    }
+
 
     public void setNewList(ArrayList<CosmoObject> newList){
         list.clear();
@@ -60,9 +58,7 @@ public class CosmoAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return list.size();
-    }
+    public int getCount() { return list.size(); }
 
     @Override
     public Object getItem(int position) {
@@ -70,11 +66,7 @@ public class CosmoAdapter extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-
+    public long getItemId(int position) { return 0; }
 
     @Override
     public View getView(final int position, final View convertView, ViewGroup viewGroup) {
@@ -159,8 +151,7 @@ public class CosmoAdapter extends BaseAdapter {
         return view;
     }
 
-
-    public String getCorrectDay(long days,String str1,String str2,String str3) {
+    private String getCorrectDay(long days,String str1,String str2,String str3) {
 
         long value = days % 100;
 

@@ -32,30 +32,34 @@
         android:text="Типы событий"
         android:textSize="10sp" />
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_comets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="false"
-        android:text="Кометы" />
+        android:text="Кометы"
+        android:theme="@style/SwitchCompatTheme" />
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_eclipses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Затмения" />
+        android:text="Затмения"
+        android:theme="@style/SwitchCompatTheme"/>
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_events"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Метеоры" />
+        android:text="Метеоры"
+        android:theme="@style/SwitchCompatTheme"/>
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_planets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Планеты" />
+        android:text="Планеты"
+        android:theme="@style/SwitchCompatTheme"/>
 
     <TextView
         android:id="@+id/sort_text_view"
@@ -65,23 +69,26 @@
         android:text="Видимость"
         android:textSize="10sp" />
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_eyes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Глаза" />
+        android:text="Глаза"
+        android:theme="@style/SwitchCompatTheme"/>
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_binoculars"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Бинокль" />
+        android:text="Бинокль"
+        android:theme="@style/SwitchCompatTheme"/>
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_telescope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Телескоп" />
+        android:text="Телескоп"
+        android:theme="@style/SwitchCompatTheme"/>
 
     <TextView
         android:id="@+id/sort_text_asc"
