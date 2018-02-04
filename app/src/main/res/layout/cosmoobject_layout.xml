@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
 
                 android:background="@color/back_dark50op"
+                android:maxLines="1"
                 android:padding="3dp"
                 android:text="Name"
                 android:textSize="15sp" />

@@ -7,48 +7,231 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background_stars"
     android:orientation="vertical"
 
+    android:background="@drawable/background_stars"
     android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar">
 
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar"></include>
 
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
+        android:divider="@drawable/mydivider"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:background="@color/back_darker"
+        android:showDividers="middle">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:text="@string/type"
+            android:textSize="12dp" />
+
+
+        <LinearLayout
+            style="@style/linearElement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/back_light"
-            android:gravity="center_horizontal"
-            android:text="Autor:"
-            android:textSize="30sp" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/type_comet" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="9"
+                android:text="@string/comet" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearElement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/type_eclipse" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="9"
+                android:text="@string/eclipse" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearElement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/type_event" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="9"
+                android:text="@string/event" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearElement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/type_planet" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="9"
+                android:text="@string/planet" />
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/vis"
+            android:textSize="12dp" />
+
+        <LinearLayout
+            style="@style/linearElement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/back_light"
-            android:gravity="center_horizontal"
-            android:text="Egor Kostenko"
-            android:textSize="24sp" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/vis_eye" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="9"
+                android:text="@string/eye" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearElement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/vis_bino" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="9"
+                android:text="@string/bino" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearElement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/vis_telescope" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="9"
+                android:text="@string/tele" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@android:color/transparent" />
+
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/back_light"
-            android:gravity="center_horizontal"
-            android:text="ekostenkodev@gmail.com"
-            android:textSize="24sp" />
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="@string/autor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="@string/myName" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="Заполнение бд:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="Андрей Отто" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textSize="18sp"
+            android:text="Почта" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="@string/email" />
     </LinearLayout>
+
+
+
 
 
 </LinearLayout>

@@ -25,8 +25,8 @@
             android:title="@string/nav_settings"/>
 
         <item android:id="@+id/nav_autor"
-            android:icon="@drawable/menu_autor"
-            android:title="@string/nav_autor"/>
+            android:icon="@drawable/menu_info"
+            android:title="@string/nav_info"/>
 
     </group>
 

@@ -14,7 +14,11 @@
     </style>
 
     <style name="SwitchCompatTheme" >
-        <item name="colorControlActivated">@color/cardview_light_background</item>
+        <item name="colorControlActivated">@color/switcher</item>
+    </style>
+
+    <style name="linearElement" >
+        <item name="android:background">@color/back_light</item>
     </style>
 
 

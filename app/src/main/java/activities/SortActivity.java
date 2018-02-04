@@ -25,15 +25,20 @@ public class SortActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
 
+
+        setToolbar();
+
+
+        setSavedSortSettings();
+
+    }
+
+    public void setToolbar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        setSavedSortSettings();
-
     }
 
     @Override

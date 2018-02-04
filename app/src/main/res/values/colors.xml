@@ -3,9 +3,17 @@
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#742cb0</color>
+    <color name="switcher">#B89DE1</color>
+    <color name="button">#554473</color>
+
+
+
+
 
     <color name="back_light">#464659</color>
     <color name="back_dark">#373747</color>
     <color name="back_light50op">#c03d3d4e</color>
     <color name="back_dark50op">#cf353544</color>
+    <color name="back_darker">#303043</color>
+
 </resources>

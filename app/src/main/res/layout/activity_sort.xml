@@ -29,7 +29,7 @@
         android:id="@+id/sort_text_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Типы событий"
+        android:text="@string/type"
         android:textSize="10sp" />
 
     <android.support.v7.widget.SwitchCompat
@@ -37,28 +37,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="false"
-        android:text="Кометы"
+        android:text="@string/comet"
         android:theme="@style/SwitchCompatTheme" />
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_eclipses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Затмения"
+        android:text="@string/eclipse"
         android:theme="@style/SwitchCompatTheme"/>
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_events"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Метеоры"
+        android:text="@string/event"
         android:theme="@style/SwitchCompatTheme"/>
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_planets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Планеты"
+        android:text="@string/planet"
         android:theme="@style/SwitchCompatTheme"/>
 
     <TextView
@@ -66,28 +66,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Видимость"
+        android:text="@string/vis"
         android:textSize="10sp" />
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_eyes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Глаза"
+        android:text="@string/eye"
         android:theme="@style/SwitchCompatTheme"/>
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_binoculars"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Бинокль"
+        android:text="@string/bino"
         android:theme="@style/SwitchCompatTheme"/>
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/sort_telescope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Телескоп"
+        android:text="@string/tele"
         android:theme="@style/SwitchCompatTheme"/>
 
     <TextView
@@ -95,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Порядок"
+        android:text="@string/order"
         android:textSize="10sp" />
 
     <Spinner
@@ -109,7 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@color/colorAccent"
+        android:background="@color/button"
         android:onClick="onSortClick"
         android:text="сортировать" />
 

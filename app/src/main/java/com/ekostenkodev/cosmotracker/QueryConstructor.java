@@ -2,15 +2,23 @@ package com.ekostenkodev.cosmotracker;
 
 import android.content.Context;
 
+import java.lang.reflect.Type;
+
 
 public class QueryConstructor {
 
 
-    private int cosmoSize;
+    public enum queryType{all, subs}
+
     public static boolean _isChanged = false;
 
-    public QueryConstructor(int cosmoSize){
-        this.cosmoSize = cosmoSize;
+    private queryType _type;
+    private Context _context;
+    private int _size;
+
+    public QueryConstructor(Context context, queryType type ){
+        this._context = context;
+        this._type = type;
     }
 
     public static boolean isChanged(){
@@ -23,10 +31,24 @@ public class QueryConstructor {
 
     }
 
-    public String getQuery(Context context){
+    public String getQuery(int sise){
+
+        _size = sise;
+
+        switch (_type){
+            case all:
+                    return getQueryForAll();
+            case subs:
+                    return getQueryForSubs();
+        }
+
+        return null;
+    }
+
+    public String getQueryForAll(){
 
 
-        SortSettings sortSettings = SharedPreferences.getSavedSortPreferences(context);
+        SortSettings sortSettings = SharedPreferences.getSavedSortPreferences(_context);
 
         String query = "SELECT * FROM CosmoObjects";
 
@@ -49,11 +71,26 @@ public class QueryConstructor {
 
         boolean[] order = sortSettings.getValue(SortSettings.sortSwitchers.order);
         if(order[0])
-            query += " ORDER BY NextArrival ASC"+ " LIMIT " + cosmoSize;
+            query += " ORDER BY NextArrival ASC";
         else
-            query += " ORDER BY NextArrival DESC" + " LIMIT " + cosmoSize;
+            query += " ORDER BY NextArrival DESC";
+
+        query += " LIMIT " + _size;
 
 
         return query;
     }
+
+    public String getQueryForSubs(){
+
+        SortSettings sortSettings = SharedPreferences.getSavedSortPreferences(_context);
+
+        String query = "SELECT * FROM CosmoObjects WHERE _id IN (SELECT CosmoID FROM Subscriptions)"; // todo запрос
+
+        query += " LIMIT " + _size;
+
+        return query;
+    }
+
+    public queryType getType(){ return _type; };
 }
