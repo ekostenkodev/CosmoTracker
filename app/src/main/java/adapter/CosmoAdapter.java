@@ -93,7 +93,7 @@ public class CosmoAdapter extends BaseAdapter {
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        listView.setAdapter(this);
+        listView.setAdapter(this); // todo перенести в меин
 
         downButton = listView.findViewById(R.id.nav_sort);
         globalSize = CosmoDataBase.getSize(context, queryConstructor.getType());
