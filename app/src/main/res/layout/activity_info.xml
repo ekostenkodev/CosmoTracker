@@ -4,6 +4,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -13,10 +14,8 @@
 <include android:id="@+id/toolbar"
     layout="@layout/toolbar"></include>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_stars"
@@ -128,6 +127,20 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/selected_back4"
+            android:background="@color/back_dark50op"
+            android:padding="10dp"
+            android:text="TextViewaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+
+        <TextView
+            android:id="@+id/selected_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/selected_back4"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:autoLink="web"
             android:background="@color/back_dark50op"
             android:padding="10dp"
             android:text="TextViewaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />

@@ -18,6 +18,7 @@ public class CosmoObject {
     private String _info; // информация о космическом объекте
     private int _visibility; // видимость объекта (индекс в int из таблицы Visibility)
     private String _image; // имя изображения
+    private String _link; // имя изображения
 
     public  CosmoObject(Cursor cursor){
         /*
@@ -31,6 +32,7 @@ public class CosmoObject {
         this._info = cursor.getString(4);
         this._visibility = cursor.getInt(5);
         this._image = this._name + ".png"; // todo ммм
+        this._link = cursor.getString(6);
 
     }
 
@@ -60,6 +62,9 @@ public class CosmoObject {
 
     public String get_image() {
         return _image;
+    }
+    public String get_link() {
+        return _link;
     }
 
 }

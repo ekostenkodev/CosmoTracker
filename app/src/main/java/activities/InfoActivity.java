@@ -59,6 +59,9 @@ public class InfoActivity extends AppCompatActivity {
         TextView info = (TextView) findViewById(R.id.selected_info);
         info.setText(cosmo.get_info());
 
+        TextView link = (TextView) findViewById(R.id.selected_link);
+        link.setText(cosmo.get_link());
+        
         TextView date = (TextView) findViewById(R.id.selected_date);
         // String s = R.string.nextArrival; todo хм
         date.setText("Дата следующего прибытия: " + cosmo.get_nextArrival());
