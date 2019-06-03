@@ -3,6 +3,7 @@ package com.ekostenkodev.cosmotracker;
 import android.content.Context;
 
 import java.lang.reflect.Type;
+import java.sql.Date;
 
 
 public class QueryConstructor {
@@ -14,7 +15,6 @@ public class QueryConstructor {
 
     private queryType _type;
     private Context _context;
-    private int _size;
 
     public QueryConstructor(Context context, queryType type ){
         this._context = context;
@@ -31,21 +31,19 @@ public class QueryConstructor {
 
     }
 
-    public String getQuery(int sise){
-
-        _size = sise;
+    public String getQuery(Date lastDate,int size){
 
         switch (_type){
             case all:
-                    return getQueryForAll();
+                    return getQueryForAll(lastDate,size);
             case subs:
-                    return getQueryForSubs();
+                    return getQueryForSubs(lastDate,size);
         }
 
         return null;
     }
 
-    public String getQueryForAll(){
+    public String getQueryForAll(Date lastDate, int size){
 
 
         SortSettings sortSettings = SharedPreferences.getSavedSortPreferences(_context);
@@ -71,23 +69,32 @@ public class QueryConstructor {
 
         boolean[] order = sortSettings.getValue(SortSettings.sortSwitchers.order);
         if(order[0])
-            query += " ORDER BY NextArrival ASC";
-        else
-            query += " ORDER BY NextArrival DESC";
+        {
+            if(lastDate==null)
+                lastDate = new Date(0);
+            query += " AND NextArrival>'"+lastDate+"' ORDER BY NextArrival ASC";
 
-        query += " LIMIT " + _size;
+        }
+        else
+        {
+            if (lastDate == null)
+                lastDate = new Date(3000,1,1);
+            query += " AND NextArrival<'" + lastDate + "'ORDER BY NextArrival DESC";
+        }
+
+        query += " LIMIT " + size;
 
 
         return query;
     }
 
-    public String getQueryForSubs(){
+    public String getQueryForSubs(Date lastDate, int size){
 
         SortSettings sortSettings = SharedPreferences.getSavedSortPreferences(_context);
 
         String query = "SELECT * FROM CosmoObjects WHERE _id IN (SELECT CosmoID FROM Subscriptions)"; // todo запрос
 
-        query += " LIMIT " + _size;
+        query += " LIMIT " + size;
 
         return query;
     }

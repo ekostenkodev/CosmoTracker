@@ -68,7 +68,7 @@ public class CosmoAdapter extends BaseAdapter {
                 }
 
                 CosmoSize += MIN_SIZE;
-                fillList(CosmoSize);
+                fillList(MIN_SIZE);
                 notifyDataSetChanged();
             }
         });
@@ -79,6 +79,8 @@ public class CosmoAdapter extends BaseAdapter {
 
     public void refresh(){
         if(QueryConstructor.isChanged()) { // todo изменить механизм обновления списка
+            list.clear();
+            CosmoSize = 0;
             fillList(CosmoAdapter.MIN_SIZE);
             downButton.setVisibility(View.VISIBLE);
         }
@@ -105,8 +107,14 @@ public class CosmoAdapter extends BaseAdapter {
     public void fillList(int size){
 
 
-        list.clear();
-        list.addAll(CosmoDataBase.getData(context, queryConstructor.getQuery(size)));
+
+        Date lastDate = null;
+        if(!list.isEmpty())
+        {
+            lastDate = list.get(list.size()-1).get_nextArrival();
+        }
+        ArrayList<CosmoObject> newList = CosmoDataBase.getData(context, queryConstructor.getQuery(lastDate,size));
+        list.addAll(newList);
 
     }
 
