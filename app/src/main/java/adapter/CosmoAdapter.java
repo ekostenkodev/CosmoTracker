@@ -68,7 +68,7 @@ public class CosmoAdapter extends BaseAdapter {
                 }
 
                 CosmoSize += MIN_SIZE;
-                fillList(MIN_SIZE);
+                AddElementsToList(MIN_SIZE);
                 notifyDataSetChanged();
             }
         });
@@ -81,7 +81,7 @@ public class CosmoAdapter extends BaseAdapter {
         if(QueryConstructor.isChanged()) { // todo изменить механизм обновления списка
             list.clear();
             CosmoSize = 0;
-            fillList(CosmoAdapter.MIN_SIZE);
+            AddElementsToList(MIN_SIZE);
             downButton.setVisibility(View.VISIBLE);
         }
         notifyDataSetChanged();
@@ -100,11 +100,13 @@ public class CosmoAdapter extends BaseAdapter {
         downButton = listView.findViewById(R.id.nav_sort);
         globalSize = CosmoDataBase.getSize(context, queryConstructor.getType());
 
+        AddElementsToList(MIN_SIZE);
+
         setDownButton(listView);
 
     }
 
-    public void fillList(int size){
+    private void AddElementsToList(int size){
 
 
 

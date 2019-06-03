@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         QueryConstructor queryConstructor = new QueryConstructor(this , QueryConstructor.queryType.all );
         adapter = new CosmoAdapter(this, listView, queryConstructor);
-        adapter.fillList(CosmoAdapter.MIN_SIZE);
 
        // Log.d("-------Size--------", String.valueOf(CosmoDataBase.getSize(this, QueryConstructor.queryType.all)));
 
