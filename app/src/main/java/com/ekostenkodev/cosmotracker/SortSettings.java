@@ -38,7 +38,7 @@ public class SortSettings {
         for (int i = 0; i < visSwitch.length; i++)
             vis[i] = visSwitch[i].isChecked();
 
-        order[0] = ((Spinner)view.findViewById(R.id.sort_order)).getSelectedItemPosition()==0?true:false;// todo отвратительно
+        order[0] = ((Spinner)view.findViewById(R.id.sort_order)).getSelectedItemPosition()==0?true:false;
     }
 
     public boolean[] getValue(sortSwitchers sortType){

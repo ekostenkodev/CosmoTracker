@@ -91,8 +91,9 @@ public class QueryConstructor {
     public String getQueryForSubs(Date lastDate, int size){
 
         SortSettings sortSettings = SharedPreferences.getSavedSortPreferences(_context);
-
-        String query = "SELECT * FROM CosmoObjects WHERE _id IN (SELECT CosmoID FROM Subscriptions)"; // todo запрос
+        if(lastDate==null)
+            lastDate = new Date(0);
+        String query = "SELECT * FROM CosmoObjects WHERE NextArrival>'" + lastDate + "' AND _id IN (SELECT CosmoID FROM Subscriptions) ORDER BY NextArrival ASC";
 
         query += " LIMIT " + size;
 

@@ -37,7 +37,6 @@ import pojo.CosmoObject;
 public class CosmoAdapter extends BaseAdapter {
 
     public static final int MIN_SIZE = 2;
-    private int CosmoSize = MIN_SIZE;
 
     private ArrayList<CosmoObject> list;
     private LayoutInflater layoutInflater;
@@ -59,16 +58,14 @@ public class CosmoAdapter extends BaseAdapter {
         downButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int oldSize = list.size();
+                AddElementsToList(MIN_SIZE);
 
-                // todo пустить загрузку
-
-                if(list.size() + MIN_SIZE >= globalSize) {
+                if(list.size()-oldSize<MIN_SIZE ) {
                     Button button = (Button)v;
-                    button.setVisibility(View.INVISIBLE);// todo кнопка продолжает занимать место, исправить
+                    button.setVisibility(View.INVISIBLE);
                 }
 
-                CosmoSize += MIN_SIZE;
-                AddElementsToList(MIN_SIZE);
                 notifyDataSetChanged();
             }
         });
@@ -78,9 +75,8 @@ public class CosmoAdapter extends BaseAdapter {
     }
 
     public void refresh(){
-        if(QueryConstructor.isChanged()) { // todo изменить механизм обновления списка
+        if(QueryConstructor.isChanged()) {
             list.clear();
-            CosmoSize = 0;
             AddElementsToList(MIN_SIZE);
             downButton.setVisibility(View.VISIBLE);
         }
@@ -89,13 +85,12 @@ public class CosmoAdapter extends BaseAdapter {
     }
 
     public CosmoAdapter(Context context, ListView listView, QueryConstructor queryConstructor) {
+
         assets = context.getAssets();
         this.list = new ArrayList<>();
         this.queryConstructor = queryConstructor;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        listView.setAdapter(this); // todo перенести в меин
 
         downButton = listView.findViewById(R.id.nav_sort);
         globalSize = CosmoDataBase.getSize(context, queryConstructor.getType());
@@ -160,7 +155,7 @@ public class CosmoAdapter extends BaseAdapter {
 
 
         TextView name = view.findViewById(R.id.list_name);
-        name.setText(cosmo.get_name()); // todo длинное имя западает на след строку, исправить
+        name.setText(cosmo.get_name());
 
 
         TextView info = view.findViewById(R.id.list_info);
@@ -223,14 +218,21 @@ public class CosmoAdapter extends BaseAdapter {
 
         long days = (nextArrival.getTime() - current.getTime())/(1000 * 60 * 60 * 24);
 
-        timer.setText(getCorrectDay(days, "дней","день","дня"));
+        timer.setText(getCorrectDayString(days));
 
         return view;
     }
 
-    private String getCorrectDay(long days,String str1,String str2,String str3) {
+    private String getCorrectDayString(long days) {
+
+        String str1 =  "дней",str2 = "день",str3 = "дня";
 
         long value = days % 100;
+
+        if(days == 0)
+            return "Сегодня";
+        if(days == 1)
+            return  "Завтра";
 
         if (value > 10 && value < 20) return days + " " + str1;
         else {

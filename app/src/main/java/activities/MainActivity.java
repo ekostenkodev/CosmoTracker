@@ -37,14 +37,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // todo пустить загрузку
-
         ListView listView =  (ListView) findViewById(R.id.lvMain);
 
         setToolbar();
 
         QueryConstructor queryConstructor = new QueryConstructor(this , QueryConstructor.queryType.all );
         adapter = new CosmoAdapter(this, listView, queryConstructor);
+        listView.setAdapter(adapter);
 
        // Log.d("-------Size--------", String.valueOf(CosmoDataBase.getSize(this, QueryConstructor.queryType.all)));
 

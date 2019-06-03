@@ -31,6 +31,7 @@ public class SubsActivity extends AppCompatActivity {
 
         QueryConstructor queryConstructor = new QueryConstructor(this , QueryConstructor.queryType.subs );
         adapter = new CosmoAdapter(this, listView, queryConstructor);
+        listView.setAdapter(adapter);
 
     }
 

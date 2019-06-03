@@ -31,7 +31,7 @@ public class CosmoObject {
         this._nextArrival = Date.valueOf(cursor.getString(3));
         this._info = cursor.getString(4);
         this._visibility = cursor.getInt(5);
-        this._image = this._name + ".png"; // todo ммм
+        this._image = this._name + ".png"; 
         this._link = cursor.getString(6);
 
     }
