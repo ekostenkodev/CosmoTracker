@@ -1,15 +1,30 @@
 package com.ekostenkodev.cosmotracker;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
+import com.ekostenkodev.cosmotracker.NotificationHelper;
+
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Observer;
 
+import activities.MainActivity;
+import activities.SubsActivity;
 import pojo.CosmoObject;
 
 
@@ -44,7 +59,7 @@ public class Subscription {
 
     }
 
-    public static void addSubscribtion(Context context, int cosmoID){
+    public static void addSubscription(Context context, int cosmoID){
 
 
 
@@ -64,11 +79,14 @@ public class Subscription {
             db = null;
         } oh = null;
 
-
+        addNotification(context,cosmoID);
 
     }
 
-    public static void deleteSubscribtion(Context context, int cosmoID){
+
+
+
+    public static void deleteSubscription(Context context, int cosmoID){
 
 
         DatabaseHelper oh = new DatabaseHelper(context, "CosmoTrackerDB.db");
@@ -83,8 +101,55 @@ public class Subscription {
             db = null;
         } oh = null;
 
+        deleteNotification(context,cosmoID);
+
+    }
+
+    private static void addNotification(Context context,int cosmoID)
+    {
+        CosmoObject cosmoObject = CosmoDataBase.getCosmoObject(context,cosmoID);
+
+        NotificationHelper.scheduleRepeatingRTCNotification(context,new Date(System.currentTimeMillis()+5));//cosmoObject.get_nextArrival()
+        NotificationHelper.enableBootReceiver(context);
+/*
+        Intent notificationIntent = new Intent(context, SubsActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context,
+                0, notificationIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
+        NotificationManager notificationManager =  (NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel("CosmoNotification", "CosmoNotification", NotificationManager.IMPORTANCE_DEFAULT);
+
+            notificationChannel.setDescription("CosmoTracker");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            notificationChannel.enableVibration(true);
+
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "CosmoNotification")
+                .setContentIntent(contentIntent)
+                .setSmallIcon(R.drawable.type_comet)
+                .setContentTitle("Последнее космическое предупреждение!")
+                .setContentText("До "+cosmoObject.get_name()+" остался один день! Поспеши!") // Текст уведомления
+                .setWhen(cosmoObject.get_nextArrival().getTime())
+                //.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+                //.setAutoCancel(true);
+;
+        notificationManager.notify(cosmoID, builder.build());
+        */
 
 
+    }
+
+    private static void deleteNotification(Context context,int cosmoID)
+    {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.cancel(cosmoID);
     }
 
 }

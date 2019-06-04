@@ -118,9 +118,9 @@ public class CosmoAdapter extends BaseAdapter {
     public void listSubscriptionCLick(int cosmoID){
 
         if(Subscription.isSubscribe(context,cosmoID))
-            Subscription.deleteSubscribtion(context, cosmoID);
+            Subscription.deleteSubscription(context, cosmoID);
         else
-            Subscription.addSubscribtion(context, cosmoID);
+            Subscription.addSubscription(context, cosmoID);
 
 
     }

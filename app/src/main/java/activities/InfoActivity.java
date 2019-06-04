@@ -105,11 +105,11 @@ public class InfoActivity extends AppCompatActivity {
 
         if(Subscription.isSubscribe(this,cosmo.get_id())) {
             sub.setImageResource(R.drawable.icon_sub_off);
-            Subscription.deleteSubscribtion(this, cosmo.get_id());
+            Subscription.deleteSubscription(this, cosmo.get_id());
         }
         else {
             sub.setImageResource(R.drawable.icon_sub_on);
-            Subscription.addSubscribtion(this, cosmo.get_id());
+            Subscription.addSubscription(this, cosmo.get_id());
         }
     }
 
