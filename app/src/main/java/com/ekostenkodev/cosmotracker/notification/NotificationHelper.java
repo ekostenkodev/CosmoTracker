@@ -1,4 +1,5 @@
-package com.ekostenkodev.cosmotracker;
+package com.ekostenkodev.cosmotracker.notification;
+
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -7,7 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.SystemClock;
+
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -24,7 +25,9 @@ public class NotificationHelper {
 
     public static void scheduleRepeatingRTCNotification(Context context, Date date) {
 
+        Calendar calendar = Calendar.getInstance();
 
+        calendar.set(date.getYear(),date.getMonth(),date.getDay());
         //Setting intent to class where Alarm broadcast message will be handled
         Intent intent = new Intent(context, AlarmReceiver.class);
         //Setting alarm pending intent
@@ -38,8 +41,9 @@ public class NotificationHelper {
         // Use this when you know what you're doing.
         //Use RTC when you don't need to wake up device, but want to deliver the notification whenever device is woke-up
         //We'll be using RTC.WAKEUP for demo purpose only
+
         alarmManagerRTC.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                date.getTime(), AlarmManager.INTERVAL_DAY, alarmIntentRTC);
+                calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntentRTC);
     }
 
 
@@ -58,7 +62,7 @@ public class NotificationHelper {
      * Enable boot receiver to persist alarms set for notifications across device reboots
      */
     public static void enableBootReceiver(Context context) {
-        ComponentName receiver = new ComponentName(context, AlarmReceiver.class);
+        ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
         PackageManager pm = context.getPackageManager();
 
         pm.setComponentEnabledSetting(receiver,

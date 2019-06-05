@@ -1,4 +1,4 @@
-package com.ekostenkodev.cosmotracker;
+package com.ekostenkodev.cosmotracker.notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,6 +11,7 @@ public class AlarmBootReceiver extends BroadcastReceiver {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             //only enabling one type of notifications for demo purposes
             //NotificationHelper.scheduleRepeatingRTCNotification(context);
+            // TODO: 05.06.2019 what 
         }
     }
 }
