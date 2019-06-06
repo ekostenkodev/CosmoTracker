@@ -31,8 +31,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //Создаём уведомление
         Notification repeatedNotification = buildLocalNotification(context, pendingIntent).build();
-        Log.d("B", "OnRec: "+System.currentTimeMillis());
-
         //Отправляем уведомление
         NotificationHelper.getNotificationManager(context).notify(NotificationHelper.ALARM_TYPE_RTC, repeatedNotification);
 
@@ -49,7 +47,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setAutoCancel(true);
         //.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
         //.setAutoCancel(true);
-        Log.d("a", "buildLocalNotification: 2");
 
         return builder;
     }

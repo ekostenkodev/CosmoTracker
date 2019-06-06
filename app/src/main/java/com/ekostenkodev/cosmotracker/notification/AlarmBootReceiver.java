@@ -10,10 +10,8 @@ public class AlarmBootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            //only enabling one type of notifications for demo purposes
-            //NotificationHelper.scheduleRepeatingRTCNotification(context);
+            NotificationHelper.scheduleAllRTCNotification(context,intent);
             Log.d("B", "BOOT: 1");
-            // TODO: 05.06.2019 what 
         }
     }
 }
