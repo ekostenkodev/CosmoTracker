@@ -1,5 +1,6 @@
 package com.ekostenkodev.cosmotracker;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,6 +16,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
+import com.ekostenkodev.cosmotracker.notification.AlarmReceiver;
 import com.ekostenkodev.cosmotracker.notification.NotificationHelper;
 
 import java.sql.Date;
@@ -105,12 +107,13 @@ public class Subscription {
 
     }
 
+
     private static void addNotification(Context context,int cosmoID)
     {
         CosmoObject cosmoObject = CosmoDataBase.getCosmoObject(context,cosmoID);
+        //Date date = new Date();
+        NotificationHelper.scheduleRepeatingRTCNotification(context,cosmoObject.get_nextArrival());
 
-        NotificationHelper.scheduleRepeatingRTCNotification(context,new Date(System.currentTimeMillis()+5));//cosmoObject.get_nextArrival()
-        NotificationHelper.enableBootReceiver(context);
 /*
         Intent notificationIntent = new Intent(context, SubsActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
@@ -141,8 +144,8 @@ public class Subscription {
                 //.setAutoCancel(true);
 ;
         notificationManager.notify(cosmoID, builder.build());
-        */
 
+*/
 
     }
 
