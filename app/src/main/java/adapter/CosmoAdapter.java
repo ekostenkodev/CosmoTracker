@@ -43,7 +43,6 @@ public class CosmoAdapter extends BaseAdapter {
     private AssetManager assets;
     private Context context;
     private QueryConstructor queryConstructor;
-    private int globalSize;
     private Button downButton;
 
     private void setDownButton(ListView listView){
@@ -93,7 +92,6 @@ public class CosmoAdapter extends BaseAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         downButton = listView.findViewById(R.id.nav_sort);
-        globalSize = CosmoDataBase.getSize(context, queryConstructor.getType());
 
         AddElementsToList(MIN_SIZE);
 

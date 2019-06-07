@@ -81,7 +81,7 @@ public class Subscription {
             db = null;
         } oh = null;
 
-        addNotification(context,cosmoID);
+        addNotification(context);
 
     }
 
@@ -103,23 +103,22 @@ public class Subscription {
             db = null;
         } oh = null;
 
-        deleteNotification(context,cosmoID);
+        deleteNotification(context);
 
+
+    }
+    private static void deleteNotification(Context context)
+    {
+        NotificationHelper.scheduleRTCNotification(context);
     }
 
 
-    private static void addNotification(Context context,int cosmoID)
+    private static void addNotification(Context context)
     {
-        CosmoObject cosmoObject = CosmoDataBase.getCosmoObject(context,cosmoID);
-        Date date = new Date(cosmoObject.get_nextArrival().getTime()-1000*60*60*24);
-
-        NotificationHelper.scheduleRTCNotification(context,cosmoID,date);
+        NotificationHelper.scheduleRTCNotification(context);
         NotificationHelper.enableBootReceiver(context);
     }
 
-    private static void deleteNotification(Context context,int cosmoID)
-    {
-        NotificationHelper.cancelAlarmRTC(cosmoID);
-    }
+
 
 }

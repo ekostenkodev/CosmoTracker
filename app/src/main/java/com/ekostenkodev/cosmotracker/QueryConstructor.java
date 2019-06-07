@@ -65,7 +65,8 @@ public class QueryConstructor {
         if(vis[1]) visStr+= (visStr.length()>0?",":"") + "'2'";
         if(vis[2]) visStr+= (visStr.length()>0?",":"") + "'3'";
 
-        query += " WHERE Type IN (" + typeStr + ") AND Visibility IN (" + visStr + ")";
+        query += " WHERE Type IN (" + typeStr + ") AND Visibility IN (" + visStr + ") AND NextArrival>'"+new Date(System.currentTimeMillis())+"'";
+
 
         boolean[] order = sortSettings.getValue(SortSettings.sortSwitchers.order);
         if(order[0])

@@ -52,44 +52,6 @@ public class CosmoDataBase {
         return cosmo;
     }
 
-    public static int getSize(Context context, QueryConstructor.queryType queryType){
-
-        DatabaseHelper oh = new DatabaseHelper(context, "CosmoTrackerDB.db");
-        SQLiteDatabase db = oh.openDataBase();
-        Cursor cur = null;
-        String strSQL = null;
-        switch (queryType){
-            case all:
-                strSQL = String.format("SELECT COUNT(*) FROM CosmoObjects");
-                break;
-            case subs:
-                strSQL = String.format("SELECT COUNT(*) FROM Subscriptions");
-            break;
-
-        }
-
-
-        cur = db.rawQuery(strSQL, null);
-
-
-
-
-        cur.moveToFirst();
-
-        int size = cur.getInt(0);
-
-        if(cur != null){
-            cur.close();
-            cur = null;
-        }
-        if(db != null){
-            db.close();
-            db = null;
-        } oh = null;
-
-        return size;
-    }
-
 
 
     public static ArrayList<CosmoObject> getData(Context context, String query ){

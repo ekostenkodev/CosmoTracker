@@ -16,6 +16,8 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 
+import com.ekostenkodev.cosmotracker.CosmoDataBase;
+import com.ekostenkodev.cosmotracker.QueryConstructor;
 import com.ekostenkodev.cosmotracker.R;
 
 import java.sql.Date;
@@ -32,9 +34,11 @@ import static android.content.Context.ALARM_SERVICE;
 
 public class NotificationHelper {
     public static int ALARM_TYPE_RTC = 100;
-    private static Dictionary<Integer,AlarmManager> alarmManagerRTC;
+    private static AlarmManager alarmManagerRTC;
     private static PendingIntent alarmIntentRTC;
     private Context _context;
+    private static Date _date;
+
     public NotificationHelper(Context context)
     {
         _context = context;
@@ -47,39 +51,47 @@ public class NotificationHelper {
 
 
 
-    public static void scheduleAllRTCNotification(Context context,Intent intent)
-    {
+    public static void scheduleRTCNotification(Context context) {
 
-    }
-    public static void scheduleRTCNotification(Context context, int cosmoId,Date date) {
+        QueryConstructor queryConstructor = new QueryConstructor(context , QueryConstructor.queryType.subs );
+        Date newDate = null;
+        try
+        {
+            newDate = CosmoDataBase.getData(context, queryConstructor.getQuery(null,1)).get(0).get_nextArrival();
+        } catch (NullPointerException e)
+        {
+            cancelAlarmRTC();
+        }
+        if(newDate == _date)
+            return;
+        _date = newDate;
 
         //получаем экземпляр calendar для получения возможности задать время срабатывания сигнала
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         //Настраиваем время (здесь 8 утра) отправки ежедневного уведомления
-        calendar.setTime(date);
+        calendar.setTime(new Date(_date.getTime() -1000*60*60*24));
         calendar.set(Calendar.HOUR_OF_DAY,20);
         calendar.set(Calendar.MINUTE,0);
 
 
         //получаем экземпляр службы AlarmManager
-        AlarmManager newAlarm = (AlarmManager)context.getSystemService(ALARM_SERVICE);
+        AlarmManager alarmManagerRTC = (AlarmManager)context.getSystemService(ALARM_SERVICE);
 
         //Настраиваем сигнал для пробуждения устройства каждый день в заданное время.
         //AlarmManager.RTC_WAKEUP отвечает за пробуждение устройства, поэтому нужно аккуратно его использовать.
         //Используйте RTC когда вам нет необходимости пробуждать устройство, и уведомления будут приходить только когда оно не спит
         //Мы используем здесь RTC.WAKEUP только для демонстрации
-        newAlarm.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+        alarmManagerRTC.setInexactRepeating(AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntentRTC);
 
-        alarmManagerRTC.put(cosmoId,newAlarm);
     }
 
 
 
-    public static void cancelAlarmRTC(int cosmoID) {
+    public static void cancelAlarmRTC() {
         if (alarmManagerRTC!= null) {
-            alarmManagerRTC.get(cosmoID).cancel(alarmIntentRTC);
+            alarmManagerRTC.cancel(alarmIntentRTC);
         }
     }
 
