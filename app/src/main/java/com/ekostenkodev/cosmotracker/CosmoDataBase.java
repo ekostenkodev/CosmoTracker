@@ -68,7 +68,6 @@ public class CosmoDataBase {
         cur.moveToFirst();
 
         while(!cur.isAfterLast()) {
-
             CosmoObject c = new CosmoObject(cur);
             list.add(c);
 
@@ -82,7 +81,6 @@ public class CosmoDataBase {
             db.close();
             db = null;
         } oh = null;
-
         return list;
     }
 }

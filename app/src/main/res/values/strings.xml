@@ -10,6 +10,7 @@
     <string name="close">Закрыть</string>
 
     <string name="down">Дальше</string>
+    <string name="emptyList">Список пуст</string>
     <string name="nextArrival">Дата следующего прибытия</string>
 
     <string name="comet">Комета</string>

@@ -63,7 +63,7 @@ public class InfoActivity extends AppCompatActivity {
         link.setText(cosmo.get_link());
 
         TextView date = (TextView) findViewById(R.id.selected_date);
-        date.setText("Дата следующего прибытия: " + cosmo.get_nextArrival());
+        date.setText("Дата следующего перигелия: " + cosmo.get_nextArrival());
 
 
         ImageView image = findViewById(R.id.selected_image);

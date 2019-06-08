@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ import pojo.CosmoObject;
 
 public class CosmoAdapter extends BaseAdapter {
 
-    public static final int MIN_SIZE = 2;
+    public static final int MIN_SIZE = 3;
 
     private ArrayList<CosmoObject> list;
     private LayoutInflater layoutInflater;
@@ -49,7 +50,10 @@ public class CosmoAdapter extends BaseAdapter {
 
         downButton = new Button(context);
         downButton.setBackgroundResource(R.color.back_dark);
-        downButton.setText(R.string.down);
+        if(list.isEmpty())
+            downButton.setText(R.string.emptyList);
+        else
+            downButton.setText(R.string.down);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 150);
         downButton.setLayoutParams(layoutParams);
         downButton.setVisibility(View.VISIBLE);
@@ -100,7 +104,6 @@ public class CosmoAdapter extends BaseAdapter {
     }
 
     private void AddElementsToList(int size){
-
 
 
         Date lastDate = null;
@@ -160,20 +163,15 @@ public class CosmoAdapter extends BaseAdapter {
         info.setText(cosmo.get_info());
 
         ImageView image = view.findViewById(R.id.list_image);
+
         try {
-            // get input stream
             InputStream ims = assets.open("cosmoimages/"+cosmo.get_image());
-            // load image as Drawable
             Drawable d = Drawable.createFromStream(ims, null);
-            // set image to ImageView
             image.setImageDrawable(d);
         }
         catch(IOException ex) {
             return null;
         }
-
-
-
 
         ImageView vis = view.findViewById(R.id.list_visibility);
         vis.setImageResource(ImageHelper.getVisibility(cosmo.get_visibility()));
