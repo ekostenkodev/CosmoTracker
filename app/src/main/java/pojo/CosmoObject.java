@@ -19,7 +19,7 @@ public class CosmoObject {
     private String _info; // информация о космическом объекте
     private int _visibility; // видимость объекта (индекс в int из таблицы Visibility)
     private String _image; // имя изображения
-    private String _link; // имя изображения
+    private String _link; // ссылка на ресурс
 
     public  CosmoObject(Cursor cursor){
         /*
