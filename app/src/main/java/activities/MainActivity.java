@@ -97,14 +97,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 break;
 
-            case R.id.nav_settings:
-
-                Toast toast = Toast.makeText(this,
-                        "Не сегодня!", Toast.LENGTH_SHORT);
-                toast.show();
-
-                break;
-
             case R.id.nav_autor:
                 intent = new Intent(this, AutorActivity.class);
                 startActivity(intent);
