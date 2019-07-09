@@ -54,8 +54,7 @@ public class CosmoAdapter extends BaseAdapter {
             downButton.setText(R.string.emptyList);
         else
             downButton.setText(R.string.down);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 150);
-        downButton.setLayoutParams(layoutParams);
+        android.widget.AbsListView.LayoutParams layoutParams = new android.widget.AbsListView.LayoutParams(android.widget.AbsListView.LayoutParams.MATCH_PARENT, 150);downButton.setLayoutParams(layoutParams);
         downButton.setVisibility(View.VISIBLE);
 
         downButton.setOnClickListener(new View.OnClickListener() {
